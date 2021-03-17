@@ -1,32 +1,18 @@
-# AAD OnmiAuth Provider
-This is a fork of Microsoft's official ruby gem for Azure Active Directory as an omniauth provider.  Please see Microsoft's original README below...
-
-
 # OmniAuth Azure Active Directory
-[![Build Status](https://travis-ci.org/AzureAD/omniauth-azure-activedirectory.png?branch=master)](https://travis-ci.org/AzureAD/omniauth-azure-activedirectory)
-[![Code Climate](https://codeclimate.com/github/AzureAD/omniauth-azure-activedirectory/badges/gpa.svg)](https://codeclimate.com/github/AzureAD/omniauth-azure-activedirectory/badges/gpa.svg)
+
+This is a fork of Microsoft's official ruby gem for Azure Active Directory as an omniauth provider.  Most of this README is taken from Microsoft's original gem, [found here](https://github.com/AzureAD/omniauth-azure-activedirectory).
 
 OmniAuth strategy to authenticate to Azure Active Directory via OpenId Connect.
 
 Before starting, set up a tenant and register a Web Application at [https://manage.windowsazure.com](https://manage.windowsazure.com). Note your client id and tenant for later.
 
+# Why this Repo?
+
+While Microsoft's original gem still works, when Azure AD is being used as the only provider for omniauth, it hasn't been updated in a significant amount of time.  When trying to implement this gem in my own projects, I faced the issue of having many runtime dependency conflicts, meaning I either needed to use older versions of other provider gems (not always possible), or update this gem for myself.  This repo is the result of deciding on the latter.
+
 ## Samples and Documentation
 
-[We provide a full suite of sample applications and documentation on GitHub](https://github.com/AzureADSamples) to help you get started with learning the Azure Identity system. This includes tutorials for native clients such as Windows, Windows Phone, iOS, OSX, Android, and Linux. We also provide full walkthroughs for authentication flows such as OAuth2, OpenID Connect, Graph API, and other awesome features. 
-
-## Community Help and Support
-
-We leverage [Stack Overflow](http://stackoverflow.com/) to work with the community on supporting Azure Active Directory and its SDKs, including this one! We highly recommend you ask your questions on Stack Overflow (we're all on there!) Also browser existing issues to see if someone has had your question before. 
-
-We recommend you use the "adal" tag so we can see it! Here is the latest Q&A on Stack Overflow for ADAL: [http://stackoverflow.com/questions/tagged/adal](http://stackoverflow.com/questions/tagged/adal)
-
-## Security Reporting
-
-If you find a security issue with our libraries or services please report it to [secure@microsoft.com](mailto:secure@microsoft.com) with as much detail as possible. Your submission may be eligible for a bounty through the [Microsoft Bounty](http://aka.ms/bugbounty) program. Please do not post security issues to GitHub Issues or any other public site. We will contact you shortly upon receiving the information. We encourage you to get notifications of when security incidents occur by visiting [this page](https://technet.microsoft.com/en-us/security/dd252948) and subscribing to Security Advisory Alerts.
-
-## We Value and Adhere to the Microsoft Open Source Code of Conduct
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+[Find Microsoft's examples here](https://github.com/AzureADSamples) to help you get started with learning the Azure Identity system. This includes tutorials for native clients such as Windows, Windows Phone, iOS, OSX, Android, and Linux. We also provide full walkthroughs for authentication flows such as OAuth2, OpenID Connect, Graph API, and other awesome features. 
 
 ## How to use this SDK
 
@@ -35,7 +21,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 Add to your Gemfile:
 
 ```ruby
-gem 'omniauth-azure-activedirectory'
+gem 'omniauth-azure-activedirectory-davevanfleet'
 ```
 
 ### Usage
@@ -46,33 +32,13 @@ For example, in Rails you would add this in `config/initializers/omniauth.rb`:
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :azure_activedirectory, ENV['AAD_CLIENT_ID'], ENV['AAD_TENANT']
+  provider :azure_activedirectory_davevanfleet, ENV['AAD_CLIENT_ID'], ENV['AAD_TENANT']
   # other providers here
 end
 ```
 
-If you are using Sinatra or something else that requires you to configure Rack yourself, you should add this to your `config.ru`:
+When you want to authenticate the user, simply redirect them to `/auth/azureactivedirectorydavevanfleet`. From there, OmniAuth will takeover. Once the user authenticates (or fails to authenticate), they will be redirected to `/auth/azureactivedirectorydavevanfleet/callback`. The authentication result is available in `request.env['omniauth.auth']`.
 
-```ruby
-use OmniAuth::Builder do
-  provider :azure_activedirectory, ENV['AAD_CLIENT_ID'], ENV['AAD_TENANT']
-end
-```
-
-When you want to authenticate the user, simply redirect them to `/auth/azureactivedirectory`. From there, OmniAuth will takeover. Once the user authenticates (or fails to authenticate), they will be redirected to `/auth/azureactivedirectory/callback` or `/auth/azureactivedirectory/failure`. The authentication result is available in `request.env['omniauth.auth']`.
-
-If you are supporting multiple OmniAuth providers, you will likely have something like this in your code:
-
-```ruby
-%w(get post).each do |method|
-  send(method, '/auth/:provider/callback') do
-    auth = request.env['omniauth.auth']
-
-    # Do what you see fit with your newly authenticated user.
-
-  end
-end
-```
 
 ### Auth Hash
 
@@ -118,7 +84,3 @@ Here's an example of an authentication hash available in the callback. You can a
     }
   }
 ```
-
-## License
-
-Copyright (c) Microsoft Corporation. Licensed under the MIT License.
