@@ -1,3 +1,7 @@
+# AAD OnmiAuth Provider
+This is a fork of Microsoft's official ruby gem for Azure Active Directory as an omniauth provider.  Please see Microsoft's original README below...
+
+
 # OmniAuth Azure Active Directory
 [![Build Status](https://travis-ci.org/AzureAD/omniauth-azure-activedirectory.png?branch=master)](https://travis-ci.org/AzureAD/omniauth-azure-activedirectory)
 [![Code Climate](https://codeclimate.com/github/AzureAD/omniauth-azure-activedirectory/badges/gpa.svg)](https://codeclimate.com/github/AzureAD/omniauth-azure-activedirectory/badges/gpa.svg)
