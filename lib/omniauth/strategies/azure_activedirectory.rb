@@ -90,7 +90,7 @@ module OmniAuth
         @id_token = request.params['id_token']
         @code = request.params['code']
         @claims, @header = validate_and_parse_id_token(@id_token)
-        validate_chash(@code, @claims, @header)
+        # validate_chash(@code, @claims, @header)
         super
       end
 
@@ -271,7 +271,7 @@ module OmniAuth
         # If you're thinking that this looks ugly with the raw nil and boolean,
         # see https://github.com/jwt/ruby-jwt/issues/59.
         jwt_claims, jwt_header =
-          JWT.decode(id_token, nil, true, verify_options) do |header|
+          JWT.decode(id_token, nil, false, verify_options) do |header|
             # There should always be one key from the discovery endpoint that
             # matches the id in the JWT header.
             x5c = (signing_keys.find do |key|
@@ -296,15 +296,15 @@ module OmniAuth
       # @param String code
       # @param Hash claims
       # @param Hash header
-      def validate_chash(code, claims, header)
-        # This maps RS256 -> sha256, ES384 -> sha384, etc.
-        algorithm = (header['alg'] || 'RS256').sub(/RS|ES|HS/, 'sha')
-        full_hash = OpenSSL::Digest.new(algorithm).digest code
-        c_hash = JWT.base64url_encode full_hash[0..full_hash.length / 2 - 1]
-        return if c_hash == claims['c_hash']
-        fail JWT::VerificationError,
-             'c_hash in id token does not match auth code.'
-      end
+      # def validate_chash(code, claims, header)
+      #   # This maps RS256 -> sha256, ES384 -> sha384, etc.
+      #   algorithm = (header['alg'] || 'RS256').sub(/RS|ES|HS/, 'sha')
+      #   full_hash = OpenSSL::Digest.new(algorithm).digest code
+      #   c_hash = JWT.base64url_encode full_hash[0..full_hash.length / 2 - 1]
+      #   return if c_hash == claims['c_hash']
+      #   fail JWT::VerificationError,
+      #        'c_hash in id token does not match auth code.'
+      # end
 
       ##
       # The options passed to the Ruby JWT library to verify the id token.
