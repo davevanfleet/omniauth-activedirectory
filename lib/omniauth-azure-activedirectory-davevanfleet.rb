@@ -20,4 +20,4 @@
 # THE SOFTWARE.
 #-------------------------------------------------------------------------------
 
-require 'omniauth/aazure_activedirectory_davevanfleet'
+require 'omniauth/azure_activedirectory_davevanfleet'
