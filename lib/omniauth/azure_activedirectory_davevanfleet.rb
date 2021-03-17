@@ -20,4 +20,5 @@
 # THE SOFTWARE.
 #-------------------------------------------------------------------------------
 
-require 'omniauth/azure_activedirectory'
+require 'omniauth/azure_activedirectory_davevanfleet/version'
+require 'omniauth/strategies/azure_activedirectory_davevanfleet'

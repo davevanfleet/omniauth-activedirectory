@@ -20,9 +20,4 @@
 # THE SOFTWARE.
 #-------------------------------------------------------------------------------
 
-module OmniAuth
-  # The release version.
-  module AzureActiveDirectory
-    VERSION = '1.0.0'
-  end
-end
+require 'omniauth/aazure_activedirectory_davevanfleet'
