@@ -17,10 +17,10 @@ module OmniAuth
       # middleware is installed. Example:
       #
       #    require 'omniauth'
-      #    require 'omniauth-azure-activedirectory'
+      #    require 'omniauth-activedirectory'
       #
       #    use OmniAuth::Builder do
-      #      provider :azure_activedirectory, ENV['AAD_KEY'], ENV['AAD_TENANT']
+      #      provider :activedirectory, ENV['AAD_KEY'], ENV['AAD_TENANT']
       #    end
       #
       args [:client_id, :tenant]
@@ -91,7 +91,7 @@ module OmniAuth
 
       ##
       # The client id of the calling application. This must be configured where
-      # AzureAD is installed as an OmniAuth strategy.
+      # AD is installed as an OmniAuth strategy.
       #
       # @return String
       def client_id
