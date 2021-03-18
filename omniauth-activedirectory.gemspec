@@ -1,14 +1,14 @@
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
-require 'omniauth/azure_activedirectory_davevanfleet/version'
+require 'omniauth/activedirectory/version'
 
 Gem::Specification.new do |s|
-  s.name            = 'omniauth-azure-activedirectory-davevanfleet'
-  s.version         = OmniAuth::AzureActiveDirectoryDavevanfleet::VERSION
+  s.name            = 'omniauth-activedirectory'
+  s.version         = OmniAuth::ActiveDirectory::VERSION
   s.author          = 'Microsoft Corporation'
   s.email           = 'nugetaad@microsoft.com'
   s.summary         = 'Azure Active Directory strategy for OmniAuth'
-  s.description     = 'Allows developers to authenticate to AAD'
-  s.homepage        = 'https://github.com/AzureAD/omniauth-azure-activedirectory'
+  s.description     = 'Allows developers to authenticate to Azure AD'
+  s.homepage        = 'https://github.com/davevanfleet/omniauth-activedirectory'
   s.license         = 'MIT'
 
   s.files           = `git ls-files`.split("\n")

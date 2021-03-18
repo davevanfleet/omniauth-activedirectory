@@ -21,7 +21,7 @@ While Microsoft's original gem still works, when Azure AD is being used as the o
 Add to your Gemfile:
 
 ```ruby
-gem 'omniauth-azure-activedirectory-davevanfleet'
+gem 'omniauth-activedirectory'
 ```
 
 ### Usage
@@ -32,12 +32,12 @@ For example, in Rails you would add this in `config/initializers/omniauth.rb`:
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :azure_activedirectory_davevanfleet, ENV['AAD_CLIENT_ID'], ENV['AAD_TENANT']
+  provider :activedirectory, ENV['AAD_CLIENT_ID'], ENV['AAD_TENANT']
   # other providers here
 end
 ```
 
-When you want to authenticate the user, simply redirect them to `/auth/azureactivedirectorydavevanfleet`. From there, OmniAuth will takeover. Once the user authenticates (or fails to authenticate), they will be redirected to `/auth/azureactivedirectorydavevanfleet/callback`. The authentication result is available in `request.env['omniauth.auth']`.
+When you want to authenticate the user, simply redirect them to `/auth/activedirectory`. From there, OmniAuth will takeover. Once the user authenticates (or fails to authenticate), they will be redirected to `/auth/activedirectory/callback`. The authentication result is available in `request.env['omniauth.auth']`.
 
 
 ### Auth Hash
