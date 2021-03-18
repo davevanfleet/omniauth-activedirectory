@@ -6,7 +6,7 @@ OmniAuth strategy to authenticate to Azure Active Directory via OpenId Connect.
 
 Before starting, set up a tenant and register a Web Application at [https://manage.windowsazure.com](https://manage.windowsazure.com). Note your client id and tenant for later.
 
-# Why this Repo?
+# Why this Gem?
 
 While Microsoft's original gem still works, when Azure AD is being used as the only provider for omniauth, it hasn't been updated in a significant amount of time.  When trying to implement this gem in my own projects, I faced the issue of having many runtime dependency conflicts, meaning I either needed to use older versions of other provider gems (not always possible), or update this gem for myself.  This repo is the result of deciding on the latter.
 
@@ -38,6 +38,14 @@ end
 ```
 
 When you want to authenticate the user, simply redirect them to `/auth/activedirectory`. From there, OmniAuth will takeover. Once the user authenticates (or fails to authenticate), they will be redirected to `/auth/activedirectory/callback`. The authentication result is available in `request.env['omniauth.auth']`.
+
+#### CSRF Concerns
+
+Rails' built-in CSRF protection can cause some hassles with omniauth, since a `POST` request is being made to your application by the provider, without an anti forgery token from you application.  We need to tells Rails not to perform this check on the specific action being used for authentication with omniauth.  Typically, your callback will be routed to the `#create` action in the `Sessions` controller.  If this is the case for your app, app the following line in the beggining of the sessions controller:  
+```ruby
+skip_before_action :verify_authenticity_token, only: :create
+```  
+Make sure that nothing sensitive is happening in this action that could expose your app to CSRF attacks.  It should pretty much just get the data in the `POST` request and use it to create a new session.
 
 
 ### Auth Hash
