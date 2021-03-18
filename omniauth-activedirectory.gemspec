@@ -4,8 +4,8 @@ require 'omniauth/activedirectory/version'
 Gem::Specification.new do |s|
   s.name            = 'omniauth-activedirectory'
   s.version         = OmniAuth::ActiveDirectory::VERSION
-  s.author          = 'Microsoft Corporation'
-  s.email           = 'nugetaad@microsoft.com'
+  s.authors         = ['Microsoft Corporation', 'Dave Van Fleet']
+  s.email           = 'vanfleet@arsome.com'
   s.summary         = 'Azure Active Directory strategy for OmniAuth'
   s.description     = 'Allows developers to authenticate to Azure AD'
   s.homepage        = 'https://github.com/davevanfleet/omniauth-activedirectory'
