@@ -1,6 +1,6 @@
 # OmniAuth Azure Active Directory
 
-This is a fork of Microsoft's official ruby gem for Azure Active Directory as an omniauth provider.  Most of this README is taken from Microsoft's original gem, [found here](https://github.com/AzureAD/omniauth-azure-activedirectory), with additions to make it compatible with other providers.
+This is a fork of Microsoft's official ruby gem for Azure Active Directory as an omniauth provider, now made availbale as its own repository and ruby gem.  Most of this README is taken from Microsoft's original gem, [found here](https://github.com/AzureAD/omniauth-azure-activedirectory), with additions to make it compatible with other providers.
 
 OmniAuth strategy to authenticate to Azure Active Directory via OpenId Connect.
 
